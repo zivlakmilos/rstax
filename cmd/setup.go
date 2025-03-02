@@ -22,23 +22,21 @@ THE SOFTWARE.
 package cmd
 
 import (
-	"fmt"
-
 	"github.com/spf13/cobra"
+	"github.com/zivlakmilos/rstax/models"
+	"github.com/zivlakmilos/rstax/tui"
+	"github.com/zivlakmilos/rstax/utils"
 )
+
+var setupParams models.SetupParams
 
 // setupCmd represents the setup command
 var setupCmd = &cobra.Command{
 	Use:   "setup",
 	Short: "Setup config data",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("setup called")
+		utils.InitParams(&setupParams)
+		tui.RunSetup(setupParams)
 	},
 }
 
@@ -54,4 +52,12 @@ func init() {
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	// setupCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+
+	setupCmd.Flags().StringVarP(&setupParams.Name, "name", "n", "", "Full Name")
+	setupCmd.Flags().StringVarP(&setupParams.Jmbg, "jmbg", "j", "", "JMBG")
+	setupCmd.Flags().StringVarP(&setupParams.Phone, "phone", "p", "", "Phone")
+	setupCmd.Flags().StringVarP(&setupParams.Email, "email", "e", "", "Email Address")
+	setupCmd.Flags().StringVarP(&setupParams.Address, "address", "a", "", "Address")
+	setupCmd.Flags().StringVarP(&setupParams.Place, "place", "c", "", "Place")
+	setupCmd.Flags().StringVarP(&setupParams.BankAccount, "bank-account", "b", "", "Bank Account Number")
 }

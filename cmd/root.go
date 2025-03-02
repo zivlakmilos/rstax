@@ -81,6 +81,14 @@ func init() {
 
 // initConfig reads in config file and ENV variables if set.
 func initConfig() {
+	viper.SetDefault("name", "")
+	viper.SetDefault("jmbg", "")
+	viper.SetDefault("phone", "")
+	viper.SetDefault("email", "")
+	viper.SetDefault("address", "")
+	viper.SetDefault("place", "")
+	viper.SetDefault("bank-account", "")
+
 	if cfgFile != "" {
 		// Use config file from the flag.
 		viper.SetConfigFile(cfgFile)
